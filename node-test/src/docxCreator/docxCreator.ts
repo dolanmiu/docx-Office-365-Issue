@@ -1,14 +1,14 @@
 import { Document, Paragraph, TextRun } from "docx";
 import { yourGoals } from "./yourGoals";
 
-function docxCreator(
+export const docxCreator = (
   state: any,
   fileName: any,
   _config: any,
   _nonClientData: any,
   nextColour: any,
   _result: any
-): Document {
+): Document => {
   const doc = new Document({
     // styles: docXStyles,
     sections: [
@@ -66,6 +66,4 @@ function docxCreator(
   });
 
   return doc;
-}
-
-export default docxCreator;
+};

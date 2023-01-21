@@ -1,5 +1,5 @@
 import { Packer } from "docx";
-import docxCreator from "./docxCreator";
+import { docxCreator } from "./docxCreator";
 import * as fs from "fs";
 
 const doc = docxCreator(
