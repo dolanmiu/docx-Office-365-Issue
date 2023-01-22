@@ -1,4 +1,5 @@
-import { Document, Paragraph, TextRun } from "docx";
+import { Document, Paragraph, TabStopPosition, TextRun } from "docx";
+import { goalFocus } from "./docxHelper/goalFocus";
 import { yourGoals } from "./yourGoals";
 
 export const docxCreator = (
@@ -11,6 +12,52 @@ export const docxCreator = (
 ): Document => {
   const doc = new Document({
     // styles: docXStyles,
+    styles: {
+      paragraphStyles: [
+        {
+          id: "MainText",
+          name: "MainText",
+          basedOn: "Normal",
+          next: "Normal",
+          quickFormat: true,
+          run: {
+            font: "Calibri",
+            size: 26,
+            bold: true,
+          },
+          paragraph: {
+            spacing: {
+              line: 276,
+              before: 20 * 72 * 0.1,
+              after: 20 * 72 * 0.05,
+            },
+            rightTabStop: TabStopPosition.MAX,
+            leftTabStop: 453.543307087,
+          },
+        },
+        {
+          id: "BlueHeading",
+          name: "BlueHeading",
+          basedOn: "Normal",
+          next: "Normal",
+          quickFormat: true,
+          run: {
+            font: "Calibri",
+            size: 26,
+            bold: true,
+          },
+          paragraph: {
+            spacing: {
+              line: 276,
+              before: 20 * 72 * 0.1,
+              after: 20 * 72 * 0.05,
+            },
+            rightTabStop: TabStopPosition.MAX,
+            leftTabStop: 453.543307087,
+          },
+        },
+      ],
+    },
     sections: [
       {
         properties: {
@@ -60,6 +107,13 @@ export const docxCreator = (
               }),
             ],
           }),
+          ...goalFocus(
+            state.goals,
+            state.annualRetirementSpending,
+            _nonClientData.Assumptions.inflation,
+            nextColour,
+            "#ecef86"
+          ),
         ],
       },
     ],
